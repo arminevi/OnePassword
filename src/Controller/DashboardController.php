@@ -12,7 +12,7 @@ class DashboardController extends AbstractController
     #[Route('/dashboard', name: 'app_dashboard')]
     public function index(): Response
     {
-        $dumpMails = ['arminsaderi@gmail.com', 'armin.saderi@cybob.com', 'armin.saderi@basecom.com'];
+        $dumpMails = ['dump@gmail.com', 'dump@web.de', 'dump@yahoo.com'];
         #dd($dumpMails);
         return $this->render('index.html.twig', [
             'emails' => $dumpMails
