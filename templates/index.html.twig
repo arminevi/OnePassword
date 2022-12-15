@@ -1,0 +1,8 @@
+{% extends "base.html.twig" %}
+{% block body %}
+    <h1>Welcome to your Dashboard</h1>
+    <h2>Das sind alle statischen Mails:</h2>
+    {% for mail in emails %}
+        <li>{{ mail }}</li>
+    {% endfor %}
+{% endblock %}
