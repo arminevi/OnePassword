@@ -11,6 +11,8 @@ import './styles/app.scss';
 // loads the jquery package from node_modules
 import $ from 'jquery';
 
+require('bootstrap');
+
 $('p').click(function() {
     console.log("test succesfull");
 });
