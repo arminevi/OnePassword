@@ -16,22 +16,23 @@
                         <div class="form">
                             <form class="row g-3">
                                 <div class="col-md-6">
-                                    <label for="inputEmail" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="Email" value="{{ entry.email }}">
+                                    <label for="inputEmail{{entry.id}}" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="inputEmail{{entry.id}}" value="{{ entry.email }}">
                                 </div>
                                 <div class="col-md-6">
-                                <label for="inputPassword" class="form-label">Password</label>
+                                <label for="inputPassword{{entry.id}}" class="form-label">Password</label>
                                     <div class="input-group mb-3">
-                                        <input type="password" class="form-control" id="Passwort" value="{{ entry.password }}">
-                                        <span class="input-group-text" id="basic-addon1">
+                                        <input type="password" class="form-control" id="inputPassword{{entry.id}}" value="{{ entry.password }}">
+                                        <span class="input-group-text eyesight" id="basic-addon{{entry.id}}">
                                             <i class="bi bi-eye-fill"></i>
                                         </span>
                                     </div>
                                 </div>
                                 <div class="col-6">
-                                    <label for="inputUser" class="form-label">User</label>
-                                    <input type="text" class="form-control" id="inputAddress" placeholder="Username" value="{{ entry.user }}">
+                                    <label for="inputUser{{entry.id}}" class="form-label">User</label>
+                                    <input type="text" class="form-control" id="inputUser{{entry.id}}" placeholder="Username" value="{{ entry.user }}">
                                 </div>
+                                {# @TODO: Add Description field? #}
                             </form>
                         </div>
                     </div>
