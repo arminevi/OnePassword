@@ -2,54 +2,47 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Entity\Password;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
+use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
+use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class DashboardController extends AbstractController
+class DashboardController extends AbstractDashboardController
 {
-    #[Route('/dashboard', name: 'app_dashboard')]
+    #[Route('/dashboard', name: 'admin')]
     public function index(): Response
     {
-        $dumpUser = "Armin";
-        $dumpPassword = array();
-        $dumpPassword['user'] = array(
-            "1" =>array(
-                "id" => 1,
-                "title" => "Google Konto",
-                "user" => "TopG",
-                "email" => "dump@gmail.com",
-                "password" => "12345"
-            ),
-            "2" =>array(
-                "id" => 2,
-                "title" => "Nike Club",
-                "user" => "",
-                "email" => "dump@gmail.com",
-                "password" => "MichaelJordan1"
-            ),
-            "3" =>array(
-                "id" => 3,
-                "title" => "Amazon",
-                "user" => "",
-                "email" => "dump@gmail.com",
-                "password" => "JeffBezos24"
-            ),
-            "4" =>array(
-                "id" => 4,
-                "title" => "Playstation",
-                "user" => "xXGamerHDXx",
-                "email" => "dump@gmail.com",
-                "password" => "playsiOne"
-            )
-        );
-        
-        #dd($dumpPassword);
+        #return parent::index();
 
-        return $this->render('index.html.twig', [
-            'data' => $dumpPassword,
-            'user' => $dumpUser
-        ]);
+        // Option 1. You can make your dashboard redirect to some common page of your backend
+        //
+        $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
+        return $this->redirect($adminUrlGenerator->setController(PasswordCrudController::class)->generateUrl());
+
+        // Option 2. You can make your dashboard redirect to different pages depending on the user
+        //
+        // if ('jane' === $this->getUser()->getUsername()) {
+        //     return $this->redirect('...');
+        // }
+
+        // Option 3. You can render some custom template to display a proper dashboard with widgets, etc.
+        // (tip: it's easier if your template extends from @EasyAdmin/page/content.html.twig)
+        //
+        // return $this->render('some/path/my-dashboard.html.twig');
+    }
+
+    public function configureDashboard(): Dashboard
+    {
+        return Dashboard::new()
+            ->setTitle('OnePassword');
+    }
+
+    public function configureMenuItems(): iterable
+    {
+        #yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
+        yield MenuItem::linkToCrud('Dashboard', 'fa fa-home', Password::class);
     }
 }
