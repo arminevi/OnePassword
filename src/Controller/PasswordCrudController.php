@@ -12,6 +12,14 @@ class PasswordCrudController extends AbstractCrudController
         return Password::class;
     }
 
+    public function createEntity(string $entityFqcn)
+    {
+        $password = new Password();
+        $password->setUid($this->getUser());
+
+        return $password;
+    }
+
     /*
     public function configureFields(string $pageName): iterable
     {
