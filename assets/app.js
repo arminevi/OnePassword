@@ -14,7 +14,3 @@ import $ from 'jquery';
 require('bootstrap');
 require('bootstrap-icons/font/bootstrap-icons.css');
 
-
-$('p').click(function() {
-    console.log("test succesfull");
-});
